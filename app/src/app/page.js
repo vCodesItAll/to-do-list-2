@@ -4,29 +4,10 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import TodoList from './components/to-do-item';
+import TodoForm from './components/to-do-form';
 
 
-function TodoForm({ onSubmit, onAdd }) {
-  const [text, setText] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(text);
-    setText('');
-    onAdd();
-  };
-
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
-
-  return (
-    <form>
-      <input type="text" className="input-text" value={text} onChange={handleChange} />
-      <button type="submit">Add</button>
-    </form>
-  );
-}
 
 function Counter({ items }) {
   const remainingItems = items.filter((item) => !item.completed);
