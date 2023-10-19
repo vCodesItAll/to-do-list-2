@@ -4,10 +4,6 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
-
-
-
-
 function TodoList({ items, filter }) {
   const [filteredItems, setFilteredItems] = useState(items);
 
@@ -38,6 +34,24 @@ function TodoList({ items, filter }) {
     }
   };
 
+  function TodoItem({ item, onToggle, onRemove }) {
+    const handleToggle = () => {
+      onToggle(item.id);
+    };
+  
+    const handleRemove = () => {
+      onRemove(item.id);
+    };
+  
+    return (
+      <div className={styles.todoItem}>
+        <input type="checkbox" checked={item.completed} onChange={handleToggle} />
+        <span className={item.completed ? styles.completed : ''}>{item.text}</span>
+        <button onClick={handleRemove}>Remove</button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div>
@@ -52,13 +66,14 @@ function TodoList({ items, filter }) {
   );
 }
 
-function TodoForm({ onSubmit }) {
+function TodoForm({ onSubmit, onAdd }) {
   const [text, setText] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(text);
     setText('');
+    onAdd();
   };
 
   const handleChange = (event) => {
@@ -80,11 +95,13 @@ function Counter({ items }) {
 
 export default function Home() {
   const [items, setItems] = useState([]);
+  const [showItems, setShowItems] = useState(false);
 
   const handleSubmit = (text) => {
     // creates todo list item with ID based on current time, automatically set to incomplete
     const newItem = { id: Date.now(), text, completed: false };
     setItems([...items, newItem]);
+    setShowItems(true);
   };
 
   const handleRemoveCompleted = () => {
@@ -100,15 +117,12 @@ export default function Home() {
   };
 
   return (
-
-
-
-      <div className={styles.grid}>
-        <TodoForm onSubmit={handleSubmit} />
-        <Counter items={items} />
-        <button onClick={handleToggleAll}>Completed All</button>
-        <button onClick={handleRemoveCompleted}>Remove Completed</button>
-        <TodoList items={items} />
-      </div>
+    <div className={styles.grid}>
+      <TodoForm onSubmit={handleSubmit} onAdd={() => setShowItems(true)} />
+      <Counter items={items} />
+      <button onClick={handleToggleAll}>Completed All</button>
+      <button onClick={handleRemoveCompleted}>Remove Completed</button>
+      {showItems && <TodoList items={items} />}
+    </div>
   );
 };

@@ -227,3 +227,119 @@
     transform: rotate(0deg);
   }
 }
+
+/* styles.css */
+
+/* Styles for the main container */
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Styles for the todo list container */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Styles for the todo item */
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.todo-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Styles for completed items */
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* Styles for the filter buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.filter-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filter-buttons button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the form */
+form {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+form button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the counter */
+.counter {
+  margin-top: 10px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Styles for action buttons */
+.action-buttons {
+  display: flex;
+  margin-top: 10px;
+}
+
+/* Define button style */
+.action-buttons button {
+  padding: 10px 20px; /* Set padding for button */
+  margin: 5px; /* Set margin for button */
+  border: none; /* Remove border from button */
+  background-color: #007bff; /* Set background color for button */
+  color: white; /* Set text color for button */
+  border-radius: 5px; /* Set border radius for button */
+  cursor: pointer; /* Set cursor to pointer on hover */
+ }
+
+.action-buttons button:hover {
+  background-color: #0056b3;
+}
