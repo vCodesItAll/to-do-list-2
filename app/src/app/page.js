@@ -1,97 +1,114 @@
+"use client"
+import { useState} from 'react';
 import Image from 'next/image'
 import styles from './page.module.css'
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+
+
+function TodoList({ items, filter }) {
+  const [filteredItems, setFilteredItems] = useState(items);
+
+  const handleToggle = (id) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === id) {
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+    setFilteredItems(updatedItems);
+  };
+
+  const handleRemove = (id) => {
+    const updatedItems = items.filter((item) => item.id !== id);
+    setFilteredItems(updatedItems);
+  };
+
+  const handleFilter = (status) => {
+    if (status === 'All') {
+      setFilteredItems(items);
+    } else if (status === 'Completed') {
+      const completedItems = items.filter((item) => item.completed);
+      setFilteredItems(completedItems);
+    } else if (status === 'To-Do') {
+      const activeItems = items.filter((item) => !item.completed);
+      setFilteredItems(activeItems);
+    }
+  };
+
+  return (
+    <div>
+      <div>
+        <button onClick={() => handleFilter('All')}>All</button>
+        <button onClick={() => handleFilter('Completed')}>Completed</button>
+        <button onClick={() => handleFilter('To-Do')}>To-Do</button>
       </div>
+      {filteredItems.map((item) => (
+        <TodoItem key={item.id} item={item} onToggle={handleToggle} onRemove={handleRemove} />
+      ))}
+    </div>
+  );
+}
+
+function TodoForm({ onSubmit }) {
+  const [text, setText] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(text);
+    setText('');
+  };
+
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={text} onChange={handleChange} />
+      <button type="submit">Add</button>
+    </form>
+  );
+}
+
+function Counter({ items }) {
+  const remainingItems = items.filter((item) => !item.completed);
+  return <div>{remainingItems.length} items remaining</div>;
+}
+
+export default function Home() {
+  const [items, setItems] = useState([]);
+
+  const handleSubmit = (text) => {
+    // creates todo list item with ID based on current time, automatically set to incomplete
+    const newItem = { id: Date.now(), text, completed: false };
+    setItems([...items, newItem]);
+  };
+
+  const handleRemoveCompleted = () => {
+    const activeItems = items.filter((item) => !item.completed);
+    setItems(activeItems);
+  };
+
+  const handleToggleAll = () => {
+    // changes all the todo items to completed
+    const completedItems = items.map((item) => ({ ...item, completed: true }));
+    // 
+    setItems(completedItems);
+  };
+
+  return (
+
+
 
       <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <TodoForm onSubmit={handleSubmit} />
+        <Counter items={items} />
+        <button onClick={handleToggleAll}>Completed All</button>
+        <button onClick={handleRemoveCompleted}>Remove Completed</button>
+        <TodoList items={items} />
       </div>
-    </main>
-  )
-}
+  );
+};
