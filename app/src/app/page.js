@@ -5,14 +5,11 @@ import styles from './page.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import TodoList from './components/to-do-item';
 import TodoForm from './components/to-do-form';
+import Counter from './components/counter';
 
 
 
 
-function Counter({ items }) {
-  const remainingItems = items.filter((item) => !item.completed);
-  return <div className="counter">{remainingItems.length} items remaining</div>;
-}
 
 export default function Home() {
   const [items, setItems] = useState([]);
