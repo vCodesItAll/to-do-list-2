@@ -1,7 +1,5 @@
 "use client"
 import { useState} from 'react';
-import Image from 'next/image';
-import styles from './page.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import TodoList from './components/to-do-item';
 import TodoForm from './components/to-do-form';
