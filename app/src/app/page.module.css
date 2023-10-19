@@ -219,14 +219,6 @@
   }
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
 
 /* styles.css */
 
@@ -288,13 +280,13 @@
 }
 
 /* Styles for the form */
-form {
+.form-container {
   display: flex;
   width: 100%;
   margin-top: 20px;
 }
 
-form input[type="text"] {
+.input-text {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
@@ -302,7 +294,7 @@ form input[type="text"] {
   font-size: 16px;
 }
 
-form button[type="submit"] {
+.submit-button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -312,7 +304,7 @@ form button[type="submit"] {
   margin-left: 10px;
 }
 
-form button[type="submit"]:hover {
+.submit-button:hover{
   background-color: #0056b3;
 }
 

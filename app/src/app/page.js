@@ -44,7 +44,7 @@ function TodoList({ items, filter }) {
     };
   
     return (
-      <div className={styles.todoItem}>
+      <div className="{styles.todoItem}">
         <input type="checkbox" checked={item.completed} onChange={handleToggle} />
         <span className={item.completed ? styles.completed : ''}>{item.text}</span>
         <button onClick={handleRemove}>Remove</button>
@@ -53,8 +53,8 @@ function TodoList({ items, filter }) {
   }
 
   return (
-    <div>
-      <div>
+    <div className="todo-list">
+      <div className="filter-buttons">
         <button onClick={() => handleFilter('All')}>All</button>
         <button onClick={() => handleFilter('Completed')}>Completed</button>
         <button onClick={() => handleFilter('To-Do')}>To-Do</button>
@@ -81,8 +81,8 @@ function TodoForm({ onSubmit, onAdd }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={text} onChange={handleChange} />
+    <form>
+      <input type="text" className="input-text" value={text} onChange={handleChange} />
       <button type="submit">Add</button>
     </form>
   );
@@ -90,7 +90,7 @@ function TodoForm({ onSubmit, onAdd }) {
 
 function Counter({ items }) {
   const remainingItems = items.filter((item) => !item.completed);
-  return <div>{remainingItems.length} items remaining</div>;
+  return <div className="counter">{remainingItems.length} items remaining</div>;
 }
 
 export default function Home() {
@@ -117,7 +117,7 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.grid}>
+    <div className="grid">
       <TodoForm onSubmit={handleSubmit} onAdd={() => setShowItems(true)} />
       <Counter items={items} />
       <button onClick={handleToggleAll}>Completed All</button>
