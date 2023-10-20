@@ -17,7 +17,7 @@ body {
   background-color: #04AA6D;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 3px #999;
 }
 
 .button:hover {background-color: #3e8e41}
@@ -27,3 +27,8 @@ body {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+input[type="text"] {
+  margin-bottom: 10px;
+}
+
