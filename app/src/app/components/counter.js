@@ -1,3 +1,19 @@
+/*
+
+
+                                         $$\                         
+                                         $$ |                        
+ $$$$$$$\  $$$$$$\  $$\   $$\ $$$$$$$\ $$$$$$\    $$$$$$\   $$$$$$\  
+$$  _____|$$  __$$\ $$ |  $$ |$$  __$$\\_$$  _|  $$  __$$\ $$  __$$\ 
+$$ /      $$ /  $$ |$$ |  $$ |$$ |  $$ | $$ |    $$$$$$$$ |$$ |  \__|
+$$ |      $$ |  $$ |$$ |  $$ |$$ |  $$ | $$ |$$\ $$   ____|$$ |      
+\$$$$$$$\ \$$$$$$  |\$$$$$$  |$$ |  $$ | \$$$$  |\$$$$$$$\ $$ |      
+ \_______| \______/  \______/ \__|  \__|  \____/  \_______|\__|      
+                                                                                                                                        
+                                                                    
+*/
+
+
 // Define a functional component called Counter that accepts a prop 'items'.
 export default function Counter({ items }) {
     // Create a new array 'remainingItems' by filtering 'items' to find uncompleted items.
