@@ -9,6 +9,7 @@ import DarkModeToggle from './components/dark-mode-toggle';
 export default function Home() {
   const [items, setItems] = useState([]);
   const [showItems, setShowItems] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleSubmit = (text) => {
     // creates todo list item with ID based on current time, automatically set to incomplete
@@ -32,12 +33,11 @@ export default function Home() {
   };
 
   const handleDarkModeToggle = () => {
-    const html = document.documentElement;
-    html.dataset.bsTheme = html.dataset.bsTheme === "dark" ? "light" : "dark";
+    setDarkMode(!darkMode);
   };
 
   return (
-    <div className="grid">
+    <div className={`grid ${darkMode ? 'dark-mode': 'light-mode'}`}>
       <TodoForm onSubmit={handleSubmit} onAdd={() => setShowItems(true)} />
       <Counter items={items} />
       <button onClick={handleToggleAll}>Completed All</button>
