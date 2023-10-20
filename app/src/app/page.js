@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './globals.css';
 import styles from './page.module.css';
 
@@ -77,7 +77,7 @@ function TodoForm({ onSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" value={text} onChange={(event) => setText(event.target.value)} />
-      <button type="submit">Add</button>
+      <button className="button" type="submit">Add</button>
     </form>
   );
 }
@@ -96,8 +96,35 @@ export default function Page() {
   return (
     <div className={styles.container}>
       <h1>To-Do List</h1>
+      <RandomQuote />
       <TodoList />
     </div>
   );
 }
+
+
+
+function RandomQuote() {
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
+
+  useEffect(() => {
+    async function fetchQuote() {
+      const response = await fetch('https://zenquotes.io/api/random');
+      const data = await response.json();
+      setQuote(data[0].q);
+      setAuthor(data[0].a);
+    }
+    fetchQuote();
+  }, []);
+
+  return (
+    <div>
+      <p>{quote}</p>
+      <p>- {author}</p>
+    </div>
+  );
+}
+
+
 
