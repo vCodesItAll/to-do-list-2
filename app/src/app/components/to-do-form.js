@@ -16,7 +16,7 @@ export default function TodoForm({ onSubmit, onAdd }) {
   
     return (
       <form>
-        <input type="text" className="input-text" value={text} onChange={handleChange} />
+        <input type="text" id="potato" className="input-text" value={text} onChange={handleChange} />
         <button type="submit">Add</button>
       </form>
     );
