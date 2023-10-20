@@ -23,8 +23,8 @@ export default function DarkModeToggle() {
     }, [isDarkMode]);
   
     return (
-      <button id="dark-mode-toggle" onClick={toggleDarkMode}>
-        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+      <button id="dark-mode-toggle" className={darkMode ? 'dark-mode' : 'light-mode'} onClick={onClick}>
+        {darkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
     );
   }

@@ -4,12 +4,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import TodoList from './components/to-do-list';
 import TodoForm from './components/to-do-form';
 import Counter from './components/counter';
-import DarkModeToggle from './components/dark-mode-toggle';
 
 export default function Home() {
   const [items, setItems] = useState([]);
   const [showItems, setShowItems] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
 
   const handleSubmit = (text) => {
     // creates todo list item with ID based on current time, automatically set to incomplete
@@ -32,17 +30,12 @@ export default function Home() {
     setItems(completedItems);
   };
 
-  const handleDarkModeToggle = () => {
-    setDarkMode(!darkMode);
-  };
-
   return (
-    <div className={`grid ${darkMode ? 'dark-mode': 'light-mode'}`}>
+    <div className="grid">
       <TodoForm onSubmit={handleSubmit} onAdd={() => setShowItems(true)} />
       <Counter items={items} />
       <button onClick={handleToggleAll}>Completed All</button>
       <button onClick={handleRemoveCompleted}>Remove Completed</button>
-      <DarkModeToggle onClick={handleDarkModeToggle} />
       {showItems && <TodoList items={items} />}
     </div>
   );
