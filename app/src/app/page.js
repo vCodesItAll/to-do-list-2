@@ -1,10 +1,21 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import './globals.css';
-import styles from './page.module.css';
+"use client";
+import React, { useState, useEffect } from "react";
+import "./globals.css";
+import styles from "./page.module.css";
 
 function TodoList() {
   const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem("todos"));
+    if (storedTodos) {
+      setItems(storedTodos);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(items));
+  }, [items]);
 
   function addItem(text) {
     setItems([...items, { text, completed: false }]);
@@ -55,43 +66,132 @@ function TodoList() {
   );
 }
 
+/*
+████████  ██████  ██████   ██████  
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██     ██████  ██████   ██████  
+
+
+   
+██ ████████ ███████ ███    ███ 
+██    ██    ██      ████  ████ 
+██    ██    █████   ██ ████ ██ 
+██    ██    ██      ██  ██  ██ 
+██    ██    ███████ ██      ██ 
+                               
+                               
+
+
+*/
+
 function TodoItem({ text, completed, onToggleCompleted, onRemove }) {
   return (
     <li>
       <input type="checkbox" checked={completed} onChange={onToggleCompleted} />
-      <span style={{ textDecoration: completed ? 'line-through' : 'none' }}>{text}</span>
-      <button className ="button" onClick={onRemove}>Remove</button>
+      <span style={{ textDecoration: completed ? "line-through" : "none" }}>
+        {text}
+      </span>
+      <button className="button" onClick={onRemove}>
+        Remove
+      </button>
     </li>
   );
 }
+/*
+████████  ██████  ██████   ██████  
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██     ██████  ██████   ██████  
 
+   
+███████  ██████  ██████  ███    ███ 
+██      ██    ██ ██   ██ ████  ████ 
+█████   ██    ██ ██████  ██ ████ ██ 
+██      ██    ██ ██   ██ ██  ██  ██ 
+██       ██████  ██   ██ ██      ██ 
+                                    
+*/
 function TodoForm({ onSubmit }) {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
     onSubmit(text);
-    setText('');
+    setText("");
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={text} onChange={(event) => setText(event.target.value)} />
-      <button className="button" type="submit">Add</button>
+      <input
+        type="text"
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+      />
+      <button className="button" type="submit">
+        Add
+      </button>
     </form>
   );
 }
+/*
+
+████████  ██████  ██████   ██████  
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██    ██    ██ ██   ██ ██    ██ 
+   ██     ██████  ██████   ██████  
+
+   
+███████ ██ ██      ████████ ███████ ██████  
+██      ██ ██         ██    ██      ██   ██ 
+█████   ██ ██         ██    █████   ██████  
+██      ██ ██         ██    ██      ██   ██ 
+██      ██ ███████    ██    ███████ ██   ██ 
+                                            
+                                            
+
+                                   
+*/
 
 function TodoFilter({ onMarkAllCompleted, onRemoveCompleted, remainingCount }) {
   return (
     <div>
-      <button className='button' onClick={onMarkAllCompleted}>Mark All Completed</button>
-      <button className='button' onClick={onRemoveCompleted}>Remove Completed</button>
       <span>{remainingCount} items remaining</span>
+      <br />
+      <button className="button" onClick={onMarkAllCompleted}>
+        Mark All Completed
+      </button>
+
+      <button className="button" onClick={onRemoveCompleted}>
+        Remove Completed
+      </button>
     </div>
   );
 }
 
+/*
+
+
+██████  ███████ ███████  █████  ██    ██ ██      ████████ 
+██   ██ ██      ██      ██   ██ ██    ██ ██         ██    
+██   ██ █████   █████   ███████ ██    ██ ██         ██    
+██   ██ ██      ██      ██   ██ ██    ██ ██         ██    
+██████  ███████ ██      ██   ██  ██████  ███████    ██    
+                                                           
+                                                       
+
+██████   █████   ██████  ███████ 
+██   ██ ██   ██ ██       ██      
+██████  ███████ ██   ███ █████   
+██      ██   ██ ██    ██ ██      
+██      ██   ██  ██████  ███████ 
+                                 
+                                 
+
+*/
 export default function Page() {
   return (
     <div className={styles.container}>
@@ -102,15 +202,34 @@ export default function Page() {
   );
 }
 
+/*
 
 
+██████   █████  ███    ██ ██████   ██████  ███    ███ 
+██   ██ ██   ██ ████   ██ ██   ██ ██    ██ ████  ████ 
+██████  ███████ ██ ██  ██ ██   ██ ██    ██ ██ ████ ██ 
+██   ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██  ██  ██ 
+██   ██ ██   ██ ██   ████ ██████   ██████  ██      ██ 
+                                                      
+                                                      
+                   
+ ██████  ██    ██  ██████  ████████ ███████ 
+██    ██ ██    ██ ██    ██    ██    ██      
+██    ██ ██    ██ ██    ██    ██    █████   
+██ ▄▄ ██ ██    ██ ██    ██    ██    ██      
+ ██████   ██████   ██████     ██    ███████ 
+    ▀▀                                      
+                                            
+                                                                            
+
+*/
 function RandomQuote() {
-  const [quote, setQuote] = useState('');
-  const [author, setAuthor] = useState('');
+  const [quote, setQuote] = useState("");
+  const [author, setAuthor] = useState("");
 
   useEffect(() => {
     async function fetchQuote() {
-      const response = await fetch('https://zenquotes.io/api/random');
+      const response = await fetch("https://zenquotes.io/api/random");
       const data = await response.json();
       setQuote(data[0].q);
       setAuthor(data[0].a);
@@ -125,6 +244,5 @@ function RandomQuote() {
     </div>
   );
 }
-
 
 
