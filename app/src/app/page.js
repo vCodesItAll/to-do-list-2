@@ -13,8 +13,8 @@ import Counter from "./components/counter";
 // Import the global CSS file 'globals.css' to apply global styles.
 import "./globals.css";
 
-// Define the main functional component called Home.
-export default function Home() {
+// Define the main functional component called App.
+export default function App() {
   // Create state variables 'items' and 'setItems' to manage the to-do list items.
   const [items, setItems] = useState([]);
 
