@@ -60,7 +60,7 @@ function TodoItem({ text, completed, onToggleCompleted, onRemove }) {
     <li>
       <input type="checkbox" checked={completed} onChange={onToggleCompleted} />
       <span style={{ textDecoration: completed ? 'line-through' : 'none' }}>{text}</span>
-      <button onClick={onRemove}>Remove</button>
+      <button className ="button" onClick={onRemove}>Remove</button>
     </li>
   );
 }
@@ -85,8 +85,8 @@ function TodoForm({ onSubmit }) {
 function TodoFilter({ onMarkAllCompleted, onRemoveCompleted, remainingCount }) {
   return (
     <div>
-      <button onClick={onMarkAllCompleted}>Mark All Completed</button>
-      <button onClick={onRemoveCompleted}>Remove Completed</button>
+      <button className='button' onClick={onMarkAllCompleted}>Mark All Completed</button>
+      <button className='button' onClick={onRemoveCompleted}>Remove Completed</button>
       <span>{remainingCount} items remaining</span>
     </div>
   );
