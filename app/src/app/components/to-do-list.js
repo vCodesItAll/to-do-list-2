@@ -4,6 +4,7 @@ export default function TodoList({ items, filter }) {
 
   // Function to toggle the completed status of a todo item by its id.
   const handleToggle = (id) => {
+    // Map and update the completed status of the specified todo item.
     const updatedItems = items.map((item) => {
       if (item.id === id) {
         return { ...item, completed: !item.completed };
@@ -16,6 +17,7 @@ export default function TodoList({ items, filter }) {
 
   // Function to remove a todo item by its id.
   const handleRemove = (id) => {
+    // Filter and keep only the todo items that do not match the specified id.
     const updatedItems = items.filter((item) => item.id !== id);
     // Set the filtered items to the updated items after removal.
     setFilteredItems(updatedItems);
